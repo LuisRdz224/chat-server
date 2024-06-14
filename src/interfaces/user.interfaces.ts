@@ -10,3 +10,11 @@ interface UserAttributes {
 }
 interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
 export interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes { }
+
+export interface UserMapper {
+    id: string,
+    username: string,
+    email: string,
+    password?: string,
+    create_time: string
+}

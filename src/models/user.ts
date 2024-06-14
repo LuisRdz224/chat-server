@@ -5,7 +5,7 @@ import db from '../db/connection';
 
 const User = db.define<UserInstance>('user', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.UUIDV4,
         primaryKey: true,
     },
     username: {
@@ -27,7 +27,7 @@ const User = db.define<UserInstance>('user', {
     },
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })
 
 export default User;
