@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { UserMapper } from '../interfaces/user.interfaces';
 import User from '../models/user';
-import { handleError } from '../helpers/errors';
+import { handleError } from '../helpers';
 
 export const getUser = async (req: Request, res: Response) => {
     res.json('hello from /api/users');
