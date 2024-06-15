@@ -18,3 +18,8 @@ export interface UserMapper {
     password?: string,
     create_time: string
 }
+
+export interface LoginUserDto {
+    email: string,
+    password: string
+}
