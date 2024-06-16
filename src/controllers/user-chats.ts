@@ -14,7 +14,7 @@ export const addMemberToChat = async (req: CustomRequest, res: Response) => {
             user_id: member,
             chat_id: chat_id,
         });
-        res.json(userChat);
+        res.status(201).json(userChat);
     } catch (error) {
         return handleError({
             error: error,

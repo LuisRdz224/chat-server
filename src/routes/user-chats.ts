@@ -5,8 +5,6 @@ import { chatExists, memberExistsInChat, userExists } from '../helpers/db-valida
 import { check } from 'express-validator';
 import { validateFields } from '../middlewares';
 
-
-
 const router = Router();
 
 router.post('/', [

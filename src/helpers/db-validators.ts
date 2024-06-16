@@ -38,7 +38,6 @@ export const chatExists: CustomValidator = async (chat_id: string) => {
 
 export const memberExistsInChat: CustomValidator = async (user_id: string, { req }) => {
     const chat_id = req.body.chat_id;
-    console.log(`chat_id: ${chat_id} user_id ${user_id}`);
     const query = await UserChat.findOne({
         where: {
             chat_id: chat_id,
