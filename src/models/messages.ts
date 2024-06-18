@@ -4,18 +4,22 @@ import { ChatInstance } from '../interfaces/chats.interfaces';
 import db from '../db/connection';
 import User from './user';
 import UserChat from './user-chat';
-import Message from './messages';
+import { MessageInstance } from '../interfaces/messages.interfaces';
 
-const Chat = db.define<ChatInstance>('chats', {
-    chat_id: {
+const Message = db.define<MessageInstance>('messages', {
+    message_id: {
         type: DataTypes.UUIDV4,
         primaryKey: true,
     },
-    creator_id: {
+    chat_id: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    name: {
+    user_id: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    message_text: {
         type: DataTypes.STRING,
         allowNull: false,
     }
@@ -24,9 +28,7 @@ const Chat = db.define<ChatInstance>('chats', {
     timestamps: false
 })
 
-Chat.hasMany(UserChat, { foreignKey: 'chat_id' });
-UserChat.belongsTo(Chat, { foreignKey: 'chat_id' });
+// Chat.hasMany(UserChat, { foreignKey: 'chat_id' });
+// UserChat.belongsTo(Chat, { foreignKey: 'chat_id' });
 
-Chat.hasMany(Message, { foreignKey: 'chat_id' });
-Message.belongsTo(Chat, { foreignKey: 'chat_id' });
-export default Chat;
+export default Message;
