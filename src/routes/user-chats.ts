@@ -3,11 +3,12 @@ import { Router } from 'express';
 import { addMemberToChat } from '../controllers/user-chats';
 import { chatExists, memberExistsInChat, userExists } from '../helpers/db-validators';
 import { check } from 'express-validator';
-import { validateFields } from '../middlewares';
+import { validateFields, validateJWT } from '../middlewares';
 
 const router = Router();
 
 router.post('/', [
+    validateJWT,
     check('member', 'member is required').notEmpty(),
     check('member', 'member must be a valid UUID').isUUID(),
     check('chat_id', 'chat is required').notEmpty(),
