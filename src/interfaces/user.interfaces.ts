@@ -24,6 +24,17 @@ export interface LoginUserDto {
     password: string
 }
 
+export interface RegisterUserDto {
+    username: string,
+    email: string,
+    password: string
+}
+
+export interface RegisterChatMembersDto {
+    member: string,
+    chat_id: string
+}
+
 export interface CustomRequest extends Request {
     user?: {
         id: string,

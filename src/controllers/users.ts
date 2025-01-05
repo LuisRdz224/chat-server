@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { hashSync, compareSync } from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
-import { UserMapper, LoginUserDto } from '../interfaces/user.interfaces';
+import { UserMapper, LoginUserDto, RegisterUserDto } from '../interfaces/user.interfaces';
 import User from '../models/user';
 import { handleError } from '../helpers';
 import { generateToken } from '../config/jwt';
@@ -12,7 +12,7 @@ export const getUser = async (req: Request, res: Response) => {
 }
 
 export const postUser = async (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+    const { username, email, password }: RegisterUserDto = req.body;
     const creationDate: string = new Date().toISOString().slice(0, 19).replace('T', ' ');
     try {
         const encryptedPassword: string = hashSync(password);

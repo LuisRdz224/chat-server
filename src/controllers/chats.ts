@@ -4,9 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import Chat from '../models/chats';
 import { handleError } from '../helpers';
 import { CustomRequest } from '../interfaces/user.interfaces';
+import { RegisterChatDto } from '../interfaces/chats.interfaces';
 
 export const postChat = async (req: CustomRequest, res: Response) => {
-    const { name } = req.body;
+    const { name }: RegisterChatDto = req.body;
     const id = uuidv4();
     try {
         const chat = await Chat.create({

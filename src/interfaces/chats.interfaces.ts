@@ -7,3 +7,7 @@ interface ChatAttributes {
 }
 
 export interface ChatInstance extends Model<ChatAttributes>, ChatAttributes { }
+
+export interface RegisterChatDto {
+    name: string
+}
