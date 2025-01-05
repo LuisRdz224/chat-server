@@ -8,3 +8,8 @@ interface MessagesAttributes {
 }
 
 export interface MessageInstance extends Model<MessagesAttributes>, MessagesAttributes { }
+
+export interface MessagePostDto {
+    chat_id: string,
+    message_text: string
+}
