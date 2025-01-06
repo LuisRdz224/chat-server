@@ -10,4 +10,5 @@ export const envs = {
     DB_URL: get('DB_URL').required().asString(),
 
     JWT_SEED: get('JWT_SEED').required().asString(),
+    ENCRYPTION_KEY: get('ENCRYPTION_KEY').required().asString(),
 };

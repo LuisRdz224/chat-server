@@ -1,9 +1,7 @@
 import { DataTypes } from 'sequelize';
 
-import { ChatInstance } from '../interfaces/chats.interfaces';
+
 import db from '../db/connection';
-import User from './user';
-import UserChat from './user-chat';
 import { MessageInstance } from '../interfaces/messages.interfaces';
 
 const Message = db.define<MessageInstance>('messages', {
@@ -22,7 +20,10 @@ const Message = db.define<MessageInstance>('messages', {
     message_text: {
         type: DataTypes.STRING,
         allowNull: false,
-    }
+    },
+    created_at: {
+        type: DataTypes.STRING,
+    },
 }, {
     freezeTableName: true,
     timestamps: false
