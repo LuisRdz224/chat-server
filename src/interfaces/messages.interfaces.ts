@@ -4,7 +4,8 @@ interface MessagesAttributes {
     message_id: string,
     chat_id: string,
     user_id: string,
-    message_text: string
+    message_text: string,
+    created_at: string
 }
 
 export interface MessageInstance extends Model<MessagesAttributes>, MessagesAttributes { }
