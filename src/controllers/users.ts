@@ -18,7 +18,7 @@ export const postUser = async (req: Request, res: Response) => {
         const encryptedPassword: string = hashSync(password);
         const id = uuidv4();
         const user = await User.create({
-            id: id,
+            user_id: id,
             username: username,
             email: email,
             password: encryptedPassword,
@@ -46,7 +46,7 @@ export const loginUser = async (req: Request, res: Response) => {
         if (!compareSync(password, user.password)) {
             return handleError({ statusCode: 401, message: 'Login credentials are invalid' }, res);
         }
-        const token = await generateToken({ id: user.id })
+        const token = await generateToken({ id: user.user_id })
         if (!token) {
             const error = new Error('Could not generate token');
             return handleError({ error: error, statusCode: 500, message: 'Internal server error' }, res)
@@ -54,7 +54,7 @@ export const loginUser = async (req: Request, res: Response) => {
         res.json({
             token: token,
             user: {
-                id: user.id,
+                id: user.user_id,
                 username: user.username,
                 email: user.email
             }

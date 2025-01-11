@@ -2,17 +2,17 @@ import { Request } from 'express';
 import { Model, Optional } from 'sequelize';
 
 interface UserAttributes {
-    id: string,
+    user_id: string,
     username: string,
     email: string,
     password: string,
     create_time: string
 }
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> { }
+interface UserCreationAttributes extends Optional<UserAttributes, 'user_id'> { }
 export interface UserInstance extends Model<UserAttributes, UserCreationAttributes>, UserAttributes { }
 
 export interface UserMapper {
-    id: string,
+    user_id: string,
     username: string,
     email: string,
     password?: string,
@@ -37,7 +37,7 @@ export interface RegisterChatMembersDto {
 
 export interface CustomRequest extends Request {
     user?: {
-        id: string,
+        user_id: string,
         username: string,
         email: string
     }
