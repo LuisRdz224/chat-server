@@ -6,34 +6,38 @@ import { decrypt, encrypt } from '../helpers/encrypt-decrypt';
 import { handleError } from '../helpers';
 import { MessagePostDto } from '../interfaces/messages.interfaces';
 import Message from '../models/messages';
-
+import User from '../models/user';
 
 export const getMessagesFromChat = async (req: Request, res: Response) => {
     try {
         const messages = await Message.findAll({
-            where: {
-                chat_id: req.params.chat_id
-            }
+            where: { chat_id: req.params.chat_id },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+            ],
         });
 
         const decryptedMessages = messages.map((message) => {
             return {
                 message_id: message.message_id,
-                chat_id: message.chat_id,
-                user_id: message.user_id,
+                username: message.user!.username,
                 message_text: decrypt(message.message_text),
-                created_at: message.created_at
-            }
-        })
+                created_at: message.created_at,
+            };
+        });
+
         res.status(200).json(decryptedMessages);
     } catch (error) {
         return handleError({
-            error: error,
+            error,
             statusCode: 500,
-            message: 'Internal server error'
+            message: 'Internal server error',
         }, res);
     }
-}
+};
 
 export const postMessage = async (req: CustomRequest, res: Response) => {
     const { message_text, chat_id }: MessagePostDto = req.body;
@@ -43,7 +47,7 @@ export const postMessage = async (req: CustomRequest, res: Response) => {
         const message = await Message.create({
             message_id: id,
             chat_id: chat_id,
-            user_id: req.user!.id,
+            user_id: req.user!.user_id,
             message_text: encryptedMessage,
             created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
         });

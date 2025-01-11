@@ -1,8 +1,9 @@
 import { DataTypes } from 'sequelize';
 
 
-import db from '../db/connection';
 import { MessageInstance } from '../interfaces/messages.interfaces';
+import db from '../db/connection';
+import User from './user';
 
 const Message = db.define<MessageInstance>('messages', {
     message_id: {
@@ -29,7 +30,7 @@ const Message = db.define<MessageInstance>('messages', {
     timestamps: false
 })
 
-// Chat.hasMany(UserChat, { foreignKey: 'chat_id' });
-// UserChat.belongsTo(Chat, { foreignKey: 'chat_id' });
+Message.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Message, { foreignKey: 'user_id' });
 
 export default Message;

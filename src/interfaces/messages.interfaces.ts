@@ -1,4 +1,5 @@
-import { Model } from 'sequelize';
+import { Model, Optional } from 'sequelize';
+import { UserInstance } from './user.interfaces';
 
 interface MessagesAttributes {
     message_id: string,
@@ -8,7 +9,10 @@ interface MessagesAttributes {
     created_at: string
 }
 
-export interface MessageInstance extends Model<MessagesAttributes>, MessagesAttributes { }
+interface MessagesCreationAttributes extends Optional<MessagesAttributes, 'message_id'> { }
+export interface MessageInstance extends Model<MessagesAttributes, MessagesCreationAttributes>, MessagesAttributes {
+    user: UserInstance
+}
 
 export interface MessagePostDto {
     chat_id: string,
