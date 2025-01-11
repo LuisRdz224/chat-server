@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
 
-import { postChat } from '../controllers/chats';
+import { getChats, postChat } from '../controllers/chats';
 import { validateFields } from '../middlewares';
 import { validateJWT } from '../middlewares';
 
@@ -14,5 +14,9 @@ router.post('/', [
     check('name', 'name must be not longer than 255 characters').notEmpty().isLength({ max: 255 }),
     validateFields
 ], postChat)
+
+router.get('/', [
+    validateJWT
+], getChats)
 
 export default router;

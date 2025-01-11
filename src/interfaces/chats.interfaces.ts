@@ -1,12 +1,15 @@
-import { Model } from 'sequelize';
+import { Model, Optional } from 'sequelize';
+import { UserInstance } from './user.interfaces';
 
 interface ChatAttributes {
     chat_id: string,
     creator_id: string,
     name: string
 }
-
-export interface ChatInstance extends Model<ChatAttributes>, ChatAttributes { }
+interface ChatCreationAttributes extends Optional<ChatAttributes, 'chat_id'> { }
+export interface ChatInstance extends Model<ChatAttributes, ChatCreationAttributes>, ChatAttributes {
+    user: UserInstance
+}
 
 export interface RegisterChatDto {
     name: string
