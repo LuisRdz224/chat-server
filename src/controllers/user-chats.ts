@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import UserChat from '../models/user-chat';
 import { handleError } from '../helpers';
-import { CustomRequest } from '../interfaces/user.interfaces';
+import { CustomRequest, RegisterChatMembersDto } from '../interfaces/user.interfaces';
 
 export const addMemberToChat = async (req: CustomRequest, res: Response) => {
-    const { member, chat_id } = req.body;
+    const { member, chat_id }: RegisterChatMembersDto = req.body;
     const id = uuidv4();
     try {
         const userChat = await UserChat.create({

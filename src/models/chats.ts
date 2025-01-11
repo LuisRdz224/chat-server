@@ -23,7 +23,11 @@ const Chat = db.define<ChatInstance>('chats', {
     timestamps: false
 })
 
+Chat.belongsTo(User, { foreignKey: 'creator_id' });
+User.hasMany(Chat, { foreignKey: 'creator_id' });
+
 Chat.hasMany(UserChat, { foreignKey: 'chat_id' });
 UserChat.belongsTo(Chat, { foreignKey: 'chat_id' });
+
 
 export default Chat;

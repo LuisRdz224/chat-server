@@ -3,9 +3,10 @@ import { DataTypes } from 'sequelize';
 import { UserInstance } from '../interfaces/user.interfaces';
 import db from '../db/connection';
 import Chat from './chats';
+import Message from './messages';
 
 const User = db.define<UserInstance>('user', {
-    id: {
+    user_id: {
         type: DataTypes.UUIDV4,
         primaryKey: true,
     },
@@ -30,8 +31,5 @@ const User = db.define<UserInstance>('user', {
     freezeTableName: true,
     timestamps: false
 })
-
-User.hasMany(Chat, { foreignKey: 'creator_id' });
-Chat.belongsTo(User, { foreignKey: 'creator_id' });
 
 export default User;

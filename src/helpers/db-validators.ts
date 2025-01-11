@@ -21,7 +21,7 @@ export const isNewUsername: CustomValidator = async (username: string) => {
 }
 
 export const userExists: CustomValidator = async (user_id: string) => {
-    const query = await User.findOne({ where: { id: user_id } });
+    const query = await User.findOne({ where: { user_id: user_id } });
     if (!query) {
         throw new Error('The user provided was not found');
     }

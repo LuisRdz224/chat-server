@@ -15,7 +15,7 @@ export const validateJWT = async (req: CustomRequest, res: Response, next: NextF
         const user = await User.findByPk(payload.id);
         if (!user) return res.status(401).json({ error: 'Invalid token - User not found' })
         req.user = {
-            id: user.id,
+            user_id: user.user_id,
             username: user.username,
             email: user.email,
         };
